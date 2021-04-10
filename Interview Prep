@@ -1,0 +1,18 @@
+List Vs Tuples 
+1. The major difference between tuples and lists is that a list is mutable, whereas a tuple is immutable. This means that a list can be changed, but a tuple cannot
+2. You can’t use a list as a key for a dictionary. This is because only immutable values can be hashed. Hence, we can only set immutable values like tuples as keys. But if you still want to use a list as a key, you must turn it into a tuple first
+
+When to Use Which
+_-----------------
+Use a tuple when you know what information goes in the container that it is. For example, when you want to store a person’s credentials for your website.
+
+>>> person=('ABC','admin','12345')
+
+But when you want to store similar elements, like in an array in C++, you should use a list.
+>>> groceries=['bread','butter','cheese']
+
+Comparison Between Method and Function in Python
+
+Let’s list down the major differences.
+1. Python method is called on an object, unlike a function. In our example above, we call start() on the object ‘car’. Conversely, we call Python function quite generically- we don’t call it on any object. Since we call a method on an object, it can access the data within it.
+2. A method may alter an object’s state, but Python function usually only operates on it, and then prints something or returns a value.
