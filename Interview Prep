@@ -1,9 +1,30 @@
+What is a dynamically typed language?
+--------------------------------------
+Type-checking can be done at two stages -
+
+Static - Data Types are checked before execution.
+Dynamic - Data Types are checked during execution.
+
+Python being an interpreted language, executes each statement line by line and thus type-checking is done on the fly, 
+during execution. Hence, Python is a Dynamically Typed language.
+
+How is memory managed in Python?
+-----------------------------------
+Memory management in Python is handled by the Python Memory Manager. The memory allocated by the manager is in form of a private heap space
+dedicated for Python. All Python objects are stored in this heap and being private, it is inaccessible to the programmer. Though, python 
+does provide some core API functions to work upon the private heap space.
+
+Additionally, Python has an in-built garbage collection to recycle the unused memory for the private heap space.
+
+
 List Vs Tuples 
+-----------------
 1. The major difference between tuples and lists is that a list is mutable, whereas a tuple is immutable. This means that a list can be changed, but a tuple cannot
-2. You can’t use a list as a key for a dictionary. This is because only immutable values can be hashed. Hence, we can only set immutable values like tuples as keys. But if you still want to use a list as a key, you must turn it into a tuple first
+2. You can’t use a list as a key for a dictionary. This is because only immutable values can be hashed. Hence, we can only set immutable values like tuples as keys. 
+But if you still want to use a list as a key, you must turn it into a tuple first
 
 When to Use Which
-_-----------------
+------------------
 Use a tuple when you know what information goes in the container that it is. For example, when you want to store a person’s credentials for your website.
 
 >>> person=('ABC','admin','12345')
@@ -11,8 +32,91 @@ Use a tuple when you know what information goes in the container that it is. For
 But when you want to store similar elements, like in an array in C++, you should use a list.
 >>> groceries=['bread','butter','cheese']
 
-Comparison Between Method and Function in Python
+How do you copy an object in Python?
+===========================================
+In Python, the assignment statement (= operator) does not copy objects. Instead, it creates a binding between the existing object
+and the target variable name. To create copies of an object in Python, we need to use the copy module. Moreover, there are two ways of 
+creating copies for the given object using the copy module -
 
+Shallow Copy is a bit-wise copy of an object. The copied object created has an exact copy of the values in the original object.
+If either of the values are references to other objects, just the reference addresses for the same are copied.
+Deep Copy copies all values recursively from source to target object, i.e. it even duplicates the objects referenced by the source object.
+from copy import copy, deepcopy
+
+list_1 = [1, 2, [3, 5], 4]
+
+## shallow copy
+
+list_2 = copy(list_1) 
+list_2[3] = 7
+list_2[2].append(6)
+
+list_2    # output => [1, 2, [3, 5, 6], 7]
+list_1    # output => [1, 2, [3, 5, 6], 4]
+
+## deep copy
+
+list_3 = deepcopy(list_1)
+list_3[3] = 8
+list_3[2].append(7)
+
+list_3    # output => [1, 2, [3, 5, 6, 7], 8]
+list_1    # output => [1, 2, [3, 5, 6], 4]
+
+What is the difference between xrange and range in Python?
+===============================================================
+xrange() and range() are quite similar in terms of functionality. They both generate a sequence of integers,
+with the only difference that range() returns a Python list, whereas, xrange() returns an xrange object.
+
+So how does that make a difference? It sure does, because unlike range(), xrange() doesn't generate a static list,
+it creates the value on the go. This technique is commonly used with an object type generators and has been termed as "yielding".
+
+What are global, protected and private attributes in Python?
+============================================================
+Global variables are public variables that are defined in the global scope. To use the variable in the global scope inside a function, we use the global keyword.
+
+Protected attributes are attributes defined with a underscore prefixed to their identifier eg. _sara. 
+They can still be accessed and modified from outside the class they are defined in but a responsible developer should refrain from doing so.
+
+Private attributes are attributes with double underscore prefixed to their identifier eg. __ansh. They cannot be accessed or modified from the outside 
+directly and will result in an AttributeError if such an attempt is made.
+
+What is __init__?
+===================================
+__init__ is a contructor method in Python and is automatically called to allocate memory when a new object/instance is created. 
+All classes have a __init__ method associated with them. It helps in distinguishing methods and attributes of a class from local variables.
+
+# class definition
+class Student:
+    def __init__(self, fname, lname, age, section):
+        self.firstname = fname
+        self.lastname = lname
+        self.age = age
+        self.section = section
+
+# creating a new object
+stu1 = Student("Sara", "Ansh", 22, "A2")
+
+
+What is pickling and unpickling?
+========================================
+Python library offers a feature - serialization out of the box. Serializing a object refers to transforming it into a format that can be stored, so as to be able to deserialize it later on, to obtain the original object. Here, the pickle module comes into play.
+
+Pickling
+Pickling is the name of the serialization process in Python. Any object in Python can be serialized into a byte stream and dumped as a file in the memory. The process of pickling is compact but pickle objects can be compressed further. Moreover, pickle keeps track of the objects it has serialized and the serialization is portable across versions.
+The function used for the above process is pickle.dump().
+
+Unpickling
+Unpickling is the complete inverse of pickling. It deserializes the byte stream to recreate the objects stored in the file, and loads the object to memory.
+The function used for the above process is pickle.load().
+
+
+
+Comparison Between Method and Function in Python
+--------------------------------------------------
 Let’s list down the major differences.
 1. Python method is called on an object, unlike a function. In our example above, we call start() on the object ‘car’. Conversely, we call Python function quite generically- we don’t call it on any object. Since we call a method on an object, it can access the data within it.
 2. A method may alter an object’s state, but Python function usually only operates on it, and then prints something or returns a value.
+
+
+
