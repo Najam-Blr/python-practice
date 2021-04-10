@@ -148,3 +148,11 @@ new_chain_map = chain_map.new_child(dict3)
 print(new_chain_map)
 
 #ChainMap({'e': 5, 'f': 6}, {'a': 1, 'b': 2}, {'c': 3, 'b': 4})
+
+student = namedtuple('student', 'fname, lname, age')
+s1 = student('najam', 'munshi', '30')
+print(s1.fname)
+print(s1.lname)
+print(s1.age)
+
+#najam, munshi, 30 
